@@ -1,8 +1,87 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React, { useContext, useState } from 'react';
+import { Platform, ActivityIndicator } from 'react-native';
+
+import { 
+  Background, 
+  Container, 
+  AreaInput, 
+  Input, 
+  SubmitButton, 
+  SubmitText
+} from '../SignIn/styles';
+
+import { AuthContext } from '../../contexts/auth';
+
 
 export default function SignUp(){
-  <View>
-    <Text>TELA CADASTRO</Text>
-  </View>
+
+  const { signUp, loadingAuth } = useContext(AuthContext)
+
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSignUp(){
+    if(nome === ''){
+      alert("Insira seu nome")
+      return;
+    }if(email === ''){
+      alert("Insira seu email")
+       return;
+    }
+    if(password === ''){
+      alert("Insira uma senha")
+       return;
+    }
+
+    signUp(email, password, nome);
+  }
+
+  return(
+    <Background>
+      <Container
+        behavior={Platform.OS === 'ios' ? 'padding' : ''}
+        enabled
+      >
+
+        <AreaInput>
+          <Input
+            placeholder="Nome"
+            value={nome}
+            onChangeText={ (text) => setNome(text) }
+          />
+        </AreaInput>
+
+        <AreaInput>
+          <Input
+            placeholder="Seu email"
+            value={email}
+            onChangeText={ (text) => setEmail(text) }
+          />
+        </AreaInput>
+
+        <AreaInput>
+          <Input
+            placeholder="Sua senha"
+            value={password}
+            onChangeText={ (text) => setPassword(text) }
+            secureTextEntry={true}
+          />
+        </AreaInput>
+
+        <SubmitButton onPress={handleSignUp}>
+          {
+            loadingAuth ? (
+                <ActivityIndicator size={20} color="#fff"/>
+            ) : (
+              <SubmitText>Cadastrar</SubmitText>
+            )
+          }
+          
+        </SubmitButton>
+
+      </Container>
+
+    </Background>
+  )
 }
