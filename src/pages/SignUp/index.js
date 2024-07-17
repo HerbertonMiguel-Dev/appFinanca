@@ -22,17 +22,7 @@ export default function SignUp(){
   const [password, setPassword] = useState('');
 
   function handleSignUp(){
-    if(nome === ''){
-      alert("Insira seu nome")
-      return;
-    }if(email === ''){
-      alert("Insira seu email")
-       return;
-    }
-    if(password === ''){
-      alert("Insira uma senha")
-       return;
-    }
+    if(nome === '' || email === '' || password === '') return;
 
     signUp(email, password, nome);
   }
@@ -72,12 +62,11 @@ export default function SignUp(){
         <SubmitButton onPress={handleSignUp}>
           {
             loadingAuth ? (
-                <ActivityIndicator size={20} color="#fff"/>
+              <ActivityIndicator size={20} color="#FFF" />
             ) : (
               <SubmitText>Cadastrar</SubmitText>
             )
           }
-          
         </SubmitButton>
 
       </Container>
