@@ -40,4 +40,3 @@ export const DescriptionText = styled.Text`
   color: #121212;
   font-size: 16px;
 `;
-

@@ -22,7 +22,17 @@ export default function SignUp(){
   const [password, setPassword] = useState('');
 
   function handleSignUp(){
-    if(nome === '' || email === '' || password === '') return;
+    if(nome === ''){
+      alert("Insira seu nome")
+      return;
+    }if(email === ''){
+      alert("Insira seu email")
+       return;
+    }
+    if(password === ''){
+      alert("Insira uma senha")
+       return;
+    }
 
     signUp(email, password, nome);
   }
